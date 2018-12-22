@@ -12,11 +12,11 @@ import (
 )
 
 const (
-	LUA_ROOT = `F:\Lua\Lua workspace\test_conf\`
-	//LUA_ROOT = `F:\EGame_Trunk\server\scripts\lua\data\config\`
-	//LUA_ROOT = ""
+	//LUA_ROOT = `F:\Lua\Lua workspace\test_conf\`
+	//LUA_ROOT = `F:\EGame_Trunk\server\scripts\lua\data\config.json\`
+	LUA_ROOT = `Test\Lua\`
 	//XLS_ROOT = `F:\go\project\src\xls2lua\`
-	XLS_ROOT = `F:\EGame_Trunk\server\tool\xls\`
+	XLS_ROOT = `Test\`
 )
 
 var Config *simplejson.Json
@@ -318,7 +318,7 @@ func process(fileName string){
 	}
 }
 
-func readConfig() {
+func readPyConfig() {
 	readFile, err := ioutil.ReadFile("config.py")
 	if err != nil {
 		showErrorMsg(err.Error())
@@ -336,6 +336,21 @@ func readConfig() {
 	Config = newJson
 }
 
+func readJsonConfig() {
+	readFile, err := ioutil.ReadFile("config.json")
+	if err != nil {
+		showErrorMsg(err.Error())
+	}
+
+	readStr := string(readFile)
+
+	newJson, err := simplejson.NewJson([]byte(readStr))
+	if err != nil {
+		showErrorMsg(err.Error())
+	}
+	Config = newJson
+}
+
 func showErrorMsg(format string, params ...interface{})  {
 	fmt.Printf(format, params...)
 	os.Exit(1)
@@ -345,7 +360,7 @@ func main() {
 	fileName := "all"
 	//fileName := "GemConf.xlsx"
 	//fileName := "Discount.xlsx"
-	//fileName := "NpcConf.xlsx"
+	//fileName := "Trade.xlsx"
 	process(fileName)
 	fmt.Println(time.Since(startTime))
 }
@@ -354,5 +369,6 @@ var startTime = time.Now()
 
 func init()  {
 	startTime = time.Now()
-	readConfig()
+	//readPyConfig()
+	readJsonConfig()
 }

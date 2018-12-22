@@ -1,0 +1,9 @@
+{
+    "GemConf.xlsx" : {
+        "gem" : {"key":["gem_type", "gem_id"], "keytype": 1}
+    },
+    "Trade.xlsx" : {
+        "coin_auto_put" : {"key" : ["trade_type1", "trade_type2","trade_type3"], "keytype": 1},
+        "gold_auto_put" : {"key" : ["trade_type1", "trade_type2","trade_type3"], "keytype": 1}
+    }
+}
